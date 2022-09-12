@@ -15,6 +15,10 @@ class GitHubUserTableViewCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        imageViewMain.layer.masksToBounds = false
+        imageViewMain.layer.cornerRadius = imageViewMain.frame.height/2
+        imageViewMain.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

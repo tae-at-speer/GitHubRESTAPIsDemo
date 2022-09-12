@@ -28,6 +28,10 @@ struct GitHubUser: Codable {
     var type: String
     var site_admin: Bool
     var score: Float
+    //variable for user profile
+    var name: String
+    var followers: Int
+    var following: Int
     
     enum CodingKeys: String, CodingKey {
         case login
@@ -49,6 +53,9 @@ struct GitHubUser: Codable {
         case type
         case site_admin
         case score
+        case name
+        case followers
+        case following
     }
     
     init(from decoder: Decoder) throws {
@@ -72,5 +79,8 @@ struct GitHubUser: Codable {
         type = try container.decodeIfPresent(String.self, forKey: .type) ?? ""
         site_admin = try container.decodeIfPresent(Bool.self, forKey: .site_admin) ?? false
         score = try container.decodeIfPresent(Float.self, forKey: .score) ?? 0.0
+        name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+        followers = try container.decodeIfPresent(Int.self, forKey: .followers) ?? 0
+        following = try container.decodeIfPresent(Int.self, forKey: .following) ?? 0
     }
 }

@@ -18,6 +18,11 @@ class GitHubUserCellViewModel {
         self.user = user
     }
     
+    func getUser() -> GitHubUser
+    {
+        return user
+    }
+    
     func getLoginName() -> String
     {
         return user.login

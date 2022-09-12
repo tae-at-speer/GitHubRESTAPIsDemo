@@ -88,6 +88,14 @@ class MainViewController: BaseViewController {
                 self?.showErrorMessageAlert(message: message)
             }
         }
+        
+        viewModel.route.bind { [weak self] _type in
+            switch _type{
+            case .initial: break
+            case .showUserProfileVC(let user):
+                self?.navigationController?.pushViewController(UserProfileViewController.init(), animated: true)
+            }
+        }
     }
     
     func setUpViewModel()
@@ -132,13 +140,14 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+        viewModel.push(indexPath: indexPath)
     }
 }
 
 // MARK: - UISearchBarDelegate
 extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        lblSearchInstruction.isHidden = true
         searchBar.resignFirstResponder()
         viewModel.searchUser(keyword: searchBar.text ?? "")
     }

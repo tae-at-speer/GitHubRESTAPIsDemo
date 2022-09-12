@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum MainViewModelRoute {
+    case initial
+    case showUserProfileVC(user: GitHubUser)
+}
+
 struct MainVMViewNotFoundStatus
 {
     var text: String
@@ -28,6 +33,7 @@ class MainViewModel {
     let indicatorStatus: Observable<MainVMIndicatorStatus?> = Observable(nil)
     let gitHubUserCellViewModels: Observable<[GitHubUserCellViewModel]> = Observable([])
     let errorMessage: Observable<String?> = Observable(nil)
+    let route: Observable<MainViewModelRoute> = Observable(.initial)
 
     init() {}
     
@@ -44,6 +50,12 @@ class MainViewModel {
         
         gitHubUserCellViewModels.value = tempList
         viewNotFoundStatus.value = MainVMViewNotFoundStatus.init(text:String().LString("Erro_NotFound") , isHidden: (tempList.count != 0))
+    }
+    
+    func push(indexPath: IndexPath)
+    {
+        let cellVM = getCellViewModel(at: indexPath)
+        route.value = .showUserProfileVC(user: cellVM.getUser())
     }
     
     func searchUser(keyword: String)
