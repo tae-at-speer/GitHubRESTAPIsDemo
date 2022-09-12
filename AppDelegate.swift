@@ -16,14 +16,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //Init UserDefaultHelper value
+        initUserDefaultValue()
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        
         let mainVC = MainViewController(nibName: "MainViewController", bundle: nil)
         mainNC = UINavigationController.init(rootViewController: mainVC)
         mainNC?.navigationBar.isHidden = true
+        
+        window?.rootViewController = mainNC;
         window?.makeKeyAndVisible()
         
         return true
     }
     
+    func initUserDefaultValue()
+    {
+        //Server Url
+        if UserDefaultHelper.standard.getData(type: String.self, forKey:.serverUrl) == nil
+        {
+            UserDefaultHelper.standard.setData(value: "https://api.github.com/", key: .serverUrl)
+        }
+        
+        //Localization
+        if UserDefaultHelper.standard.getData(type: String.self, forKey:.localization) == nil
+        {
+            UserDefaultHelper.standard.setData(value: "en", key: .localization)
+        }
+        
+        //Per_page
+        if UserDefaultHelper.standard.getData(type: String.self, forKey:.searchPerPage) == nil
+        {
+            UserDefaultHelper.standard.setData(value: "100", key: .searchPerPage)
+        }
+        
+        
+    }
 }
 

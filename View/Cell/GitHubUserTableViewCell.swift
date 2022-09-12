@@ -20,4 +20,10 @@ class GitHubUserTableViewCell: BaseTableViewCell {
         // Configure the view for the selected state
     }
     
+    var cellViewModel: GitHubUserCellViewModel? {
+        didSet {
+           
+        }
+    }
+    
 }
