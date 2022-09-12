@@ -31,4 +31,20 @@ class ApiService {
         }
     }
     
+    func getUserProfile(login: String, completion: @escaping (Bool, Data?, String?) -> ())
+    {
+        let url = requestUrl(string: "users/\(login)")
+        
+        HttpRequestHelper().GET(url: url,
+                                params: [:],
+                                httpHeader: .application_json) { success, data, errorStr in
+            
+            if success {
+                completion(true, data, nil)
+            } else {
+                completion(false, nil, "Error: getOffer Request failed")
+            }
+        }
+    }
+    
 }

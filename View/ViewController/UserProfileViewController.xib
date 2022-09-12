@@ -10,6 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserProfileViewController" customModule="GitHubRESTAPIsDemo" customModuleProvider="target">
             <connections>
+                <outlet property="imageViewMain" destination="9Vz-RD-fLS" id="5og-Y4-xUC"/>
+                <outlet property="indicator" destination="E0E-tz-8RZ" id="GGd-l5-wix"/>
+                <outlet property="lblLoginName" destination="3zY-ct-Yuj" id="qAu-v5-hu3"/>
+                <outlet property="lblUserName" destination="B0H-3d-c4v" id="FWe-7P-bdo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,14 +31,30 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seE-0O-lq0">
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="e3b-4O-J4W"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="chevron.left" catalog="system"/>
+                            <connections>
+                                <action selector="backDidTap:" destination="-1" eventType="touchUpInside" id="mHy-57-nqx"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="seE-0O-lq0" firstAttribute="top" secondItem="Axv-1O-uYZ" secondAttribute="top" id="4EZ-u9-78p"/>
                         <constraint firstAttribute="trailing" secondItem="Cvm-LQ-9sN" secondAttribute="trailing" id="HiG-zv-YF3"/>
                         <constraint firstAttribute="height" constant="60" id="VeC-mv-LY4"/>
                         <constraint firstItem="Cvm-LQ-9sN" firstAttribute="leading" secondItem="Axv-1O-uYZ" secondAttribute="leading" id="dkc-iB-rpJ"/>
+                        <constraint firstItem="seE-0O-lq0" firstAttribute="leading" secondItem="Axv-1O-uYZ" secondAttribute="leading" id="fVc-jv-dKp"/>
                         <constraint firstItem="Cvm-LQ-9sN" firstAttribute="top" secondItem="Axv-1O-uYZ" secondAttribute="top" id="iQZ-fY-hmS"/>
                         <constraint firstAttribute="bottom" secondItem="Cvm-LQ-9sN" secondAttribute="bottom" id="tWz-XX-AuR"/>
+                        <constraint firstAttribute="bottom" secondItem="seE-0O-lq0" secondAttribute="bottom" id="tlk-h3-VaS"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVj-VY-f8E">
@@ -66,13 +86,18 @@
                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="E0E-tz-8RZ">
+                    <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="B0H-3d-c4v" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="Aw5-ye-et6"/>
+                <constraint firstItem="E0E-tz-8RZ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="DMf-69-ZZS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="wVj-VY-f8E" secondAttribute="bottom" id="Hks-Ff-IL2"/>
                 <constraint firstAttribute="trailing" secondItem="wVj-VY-f8E" secondAttribute="trailing" id="M7G-ir-fcU"/>
+                <constraint firstItem="E0E-tz-8RZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UVs-Jc-nrc"/>
                 <constraint firstItem="9Vz-RD-fLS" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="WL1-n7-sso"/>
                 <constraint firstItem="wVj-VY-f8E" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Wxc-ia-adT"/>
                 <constraint firstItem="3zY-ct-Yuj" firstAttribute="top" secondItem="B0H-3d-c4v" secondAttribute="bottom" id="XMp-2Y-JHr"/>
@@ -80,7 +105,7 @@
                 <constraint firstItem="B0H-3d-c4v" firstAttribute="top" secondItem="9Vz-RD-fLS" secondAttribute="bottom" constant="16" id="bar-HJ-AaV"/>
                 <constraint firstItem="Axv-1O-uYZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dNp-Jz-Vnm"/>
                 <constraint firstItem="3zY-ct-Yuj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="ddu-6g-j5l"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Axv-1O-uYZ" secondAttribute="trailing" id="hCo-M6-6dM"/>
+                <constraint firstAttribute="trailing" secondItem="Axv-1O-uYZ" secondAttribute="trailing" id="hCo-M6-6dM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="B0H-3d-c4v" secondAttribute="trailing" constant="60" id="hwV-Bb-lur"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3zY-ct-Yuj" secondAttribute="trailing" constant="60" id="iR8-mv-ndb"/>
                 <constraint firstItem="9Vz-RD-fLS" firstAttribute="top" secondItem="Axv-1O-uYZ" secondAttribute="bottom" constant="32" id="p6i-sO-acS"/>
@@ -91,6 +116,7 @@
         </view>
     </objects>
     <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

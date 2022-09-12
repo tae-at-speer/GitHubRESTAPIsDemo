@@ -93,7 +93,7 @@ class MainViewController: BaseViewController {
             switch _type{
             case .initial: break
             case .showUserProfileVC(let user):
-                self?.navigationController?.pushViewController(UserProfileViewController.init(), animated: true)
+                self?.navigationController?.pushViewController(UserProfileViewController.init(login: user.login), animated: true)
             }
         }
     }
@@ -103,6 +103,7 @@ class MainViewController: BaseViewController {
         
     }
 
+    
 
     /*
     // MARK: - Navigation

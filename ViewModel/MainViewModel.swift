@@ -49,7 +49,7 @@ class MainViewModel {
         }
         
         gitHubUserCellViewModels.value = tempList
-        viewNotFoundStatus.value = MainVMViewNotFoundStatus.init(text:String().LString("Erro_NotFound") , isHidden: (tempList.count != 0))
+        viewNotFoundStatus.value = MainVMViewNotFoundStatus.init(text:String().LString("Error_NotFound") , isHidden: (tempList.count != 0))
     }
     
     func push(indexPath: IndexPath)
