@@ -11,10 +11,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="GitHubRESTAPIsDemo" customModuleProvider="target">
             <connections>
                 <outlet property="indicator" destination="rOd-sv-zwu" id="xAa-ER-r0u"/>
+                <outlet property="lblNotFound" destination="6V7-f7-ldT" id="7WW-H1-1vI"/>
                 <outlet property="lblSearchInstruction" destination="v70-JI-Slj" id="v8b-68-McJ"/>
                 <outlet property="searchBar" destination="p3P-VG-jXx" id="4zr-DQ-bqa"/>
                 <outlet property="tableViewMain" destination="DPK-2P-AiR" id="NbM-bm-lHO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewNotFound" destination="oQl-iR-bif" id="coy-mB-7EF"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -42,6 +44,24 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQl-iR-bif">
+                    <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6V7-f7-ldT">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="758"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="6V7-f7-ldT" firstAttribute="top" secondItem="oQl-iR-bif" secondAttribute="top" id="0PD-PZ-Fxt"/>
+                        <constraint firstAttribute="trailing" secondItem="6V7-f7-ldT" secondAttribute="trailing" id="2Nc-sa-Fz5"/>
+                        <constraint firstItem="6V7-f7-ldT" firstAttribute="leading" secondItem="oQl-iR-bif" secondAttribute="leading" id="2Uu-5U-zAm"/>
+                        <constraint firstAttribute="bottom" secondItem="6V7-f7-ldT" secondAttribute="bottom" id="haq-Sm-7SL"/>
+                    </constraints>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DPK-2P-AiR">
                     <rect key="frame" x="0.0" y="148" width="414" height="714"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -73,12 +93,16 @@
                 <constraint firstItem="v70-JI-Slj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bfH-2B-EbF"/>
                 <constraint firstItem="rOd-sv-zwu" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="brj-lr-CbX"/>
                 <constraint firstItem="nUj-yq-fea" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="drJ-iF-qnR"/>
+                <constraint firstItem="oQl-iR-bif" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gOj-DT-pIh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nUj-yq-fea" secondAttribute="trailing" id="h9f-Hu-I70"/>
                 <constraint firstItem="v70-JI-Slj" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-120" id="jiR-e1-hfo"/>
                 <constraint firstAttribute="trailing" secondItem="v70-JI-Slj" secondAttribute="trailing" constant="32" id="jqH-C2-q1j"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oQl-iR-bif" secondAttribute="trailing" id="k0V-DQ-fmO"/>
                 <constraint firstItem="Jv6-IQ-0iw" firstAttribute="top" secondItem="nUj-yq-fea" secondAttribute="bottom" id="kIZ-xy-BDa"/>
                 <constraint firstItem="rOd-sv-zwu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mJu-uQ-9ty"/>
                 <constraint firstItem="DPK-2P-AiR" firstAttribute="top" secondItem="p3P-VG-jXx" secondAttribute="bottom" id="o5O-ON-ucb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="oQl-iR-bif" secondAttribute="bottom" id="oqt-Bc-0Et"/>
+                <constraint firstItem="oQl-iR-bif" firstAttribute="top" secondItem="Jv6-IQ-0iw" secondAttribute="bottom" id="yDE-7z-Y28"/>
                 <constraint firstItem="nUj-yq-fea" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yQs-eJ-Bnv"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="111.83035714285714"/>

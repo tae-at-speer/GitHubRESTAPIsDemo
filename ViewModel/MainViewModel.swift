@@ -7,6 +7,12 @@
 
 import Foundation
 
+struct MainVMViewNotFoundStatus
+{
+    var text: String
+    var isHidden: Bool
+}
+
 struct MainVMIndicatorStatus
 {
     var isAnimated: Bool
@@ -18,6 +24,7 @@ class MainViewModel {
     private var users: [GitHubUser] = []
     private var pageNo: Int = 0
     
+    let viewNotFoundStatus: Observable<MainVMViewNotFoundStatus?> = Observable(nil)
     let indicatorStatus: Observable<MainVMIndicatorStatus?> = Observable(nil)
     let gitHubUserCellViewModels: Observable<[GitHubUserCellViewModel]> = Observable([])
     let errorMessage: Observable<String?> = Observable(nil)
@@ -36,10 +43,12 @@ class MainViewModel {
         }
         
         gitHubUserCellViewModels.value = tempList
+        viewNotFoundStatus.value = MainVMViewNotFoundStatus.init(text:String().LString("Erro_NotFound") , isHidden: (tempList.count != 0))
     }
     
     func searchUser(keyword: String)
     {
+        viewNotFoundStatus.value = MainVMViewNotFoundStatus.init(text:"" , isHidden: true)
         indicatorStatus.value = MainVMIndicatorStatus.init(isAnimated: true, isHidden: false)
         
         DispatchQueue.global(qos: .background).async {

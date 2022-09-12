@@ -10,6 +10,8 @@ import UIKit
 class MainViewController: BaseViewController {
     
     @IBOutlet weak var lblSearchInstruction: UILabel!
+    @IBOutlet weak var viewNotFound: UIView!
+    @IBOutlet weak var lblNotFound: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableViewMain: UITableView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
@@ -31,6 +33,9 @@ class MainViewController: BaseViewController {
         //UILabel
         lblSearchInstruction.text = String().LString("Common_SearchInstruction")
         
+        //UIView
+        viewNotFound.isHidden = true //Default hidden
+        
         //UITableView
         tableViewMain.delegate = self
         tableViewMain.dataSource = self
@@ -39,8 +44,8 @@ class MainViewController: BaseViewController {
         
         tableViewMain.register(GitHubUserTableViewCell.nib, forCellReuseIdentifier: GitHubUserTableViewCell.identifier)
         
-        //UIActivityIndicatorView (Default hidden)
-        indicator.isHidden = true
+        //UIActivityIndicatorView
+        indicator.isHidden = true //Default hidden
         
         //UISearchBar
         searchBar.delegate = self
@@ -48,11 +53,18 @@ class MainViewController: BaseViewController {
     
     func setUpBinding()
     {
-        viewModel.indicatorStatus.bind { [weak self] in
-            guard let status = $0 else { return }
+        viewModel.viewNotFoundStatus.bind { [weak self] in
+            guard let info = $0 else { return }
             DispatchQueue.main.async {
-                self?.indicator.isHidden = status.isHidden
-                if status.isAnimated {
+                self?.viewNotFound.isHidden = info.isHidden
+            }
+        }
+        
+        viewModel.indicatorStatus.bind { [weak self] in
+            guard let info = $0 else { return }
+            DispatchQueue.main.async {
+                self?.indicator.isHidden = info.isHidden
+                if info.isAnimated {
                     self?.indicator.startAnimating()
                 }
                 else
