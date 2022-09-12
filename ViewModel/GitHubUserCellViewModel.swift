@@ -18,4 +18,14 @@ class GitHubUserCellViewModel {
         self.user = user
     }
     
+    func getLoginName() -> String
+    {
+        return user.login
+    }
+    
+    func getAvatarUrl() -> URL
+    {
+        return URL.init(string: user.avatar_url)!
+    }
+    
 }

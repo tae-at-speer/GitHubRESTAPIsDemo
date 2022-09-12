@@ -9,6 +9,7 @@ import UIKit
 
 class MainViewController: BaseViewController {
     
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblSearchInstruction: UILabel!
     @IBOutlet weak var viewNotFound: UIView!
     @IBOutlet weak var lblNotFound: UILabel!
@@ -31,6 +32,7 @@ class MainViewController: BaseViewController {
     func setUpUIs()
     {
         //UILabel
+        lblTitle.text = String().LString("Common_GitHubUserBrowser")
         lblSearchInstruction.text = String().LString("Common_SearchInstruction")
         
         //UIView
@@ -125,6 +127,7 @@ extension MainViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GitHubUserTableViewCell.identifier, for: indexPath) as? GitHubUserTableViewCell else { fatalError("xib does not exists") }
         let cellVM = viewModel.getCellViewModel(at: indexPath)
         cell.cellViewModel = cellVM
+        cell.selectionStyle = .none;
         return cell
     }
     

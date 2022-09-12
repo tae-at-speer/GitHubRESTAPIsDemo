@@ -6,6 +6,7 @@
   
 */
 
+"Common_GitHubUserBrowser" = "GitHub User Browser";
 "Common_SearchInstruction" = "Please input username on search bar above and click Search button on the keyboard to search for GitHub User";
 
 "Erro_NotFound" = "User Not Found";

@@ -13,6 +13,7 @@
                 <outlet property="indicator" destination="rOd-sv-zwu" id="xAa-ER-r0u"/>
                 <outlet property="lblNotFound" destination="6V7-f7-ldT" id="7WW-H1-1vI"/>
                 <outlet property="lblSearchInstruction" destination="v70-JI-Slj" id="v8b-68-McJ"/>
+                <outlet property="lblTitle" destination="MDW-PZ-t3v" id="1rd-DQ-H6F"/>
                 <outlet property="searchBar" destination="p3P-VG-jXx" id="4zr-DQ-bqa"/>
                 <outlet property="tableViewMain" destination="DPK-2P-AiR" id="NbM-bm-lHO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -26,9 +27,21 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jv6-IQ-0iw">
                     <rect key="frame" x="0.0" y="44" width="414" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GitHub User Browser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDW-PZ-t3v">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="MDW-PZ-t3v" secondAttribute="trailing" id="14o-ll-9pA"/>
                         <constraint firstAttribute="height" constant="60" id="ZY9-Lh-5MZ"/>
+                        <constraint firstAttribute="bottom" secondItem="MDW-PZ-t3v" secondAttribute="bottom" id="eTE-ZN-vG9"/>
+                        <constraint firstItem="MDW-PZ-t3v" firstAttribute="leading" secondItem="Jv6-IQ-0iw" secondAttribute="leading" id="m9L-EE-Lm9"/>
+                        <constraint firstItem="MDW-PZ-t3v" firstAttribute="top" secondItem="Jv6-IQ-0iw" secondAttribute="top" id="yP4-7L-dia"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUj-yq-fea">

@@ -64,6 +64,7 @@ class MainViewModel {
                 do {
                     guard let data = data else
                     {
+                        self?.gitHubUserCellViewModels.value = []
                         self?.errorMessage.value = String().LString("Error_DidNotReceiveData")
                         return
                     }
