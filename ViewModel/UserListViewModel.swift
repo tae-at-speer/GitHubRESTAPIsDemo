@@ -44,7 +44,9 @@ class UserListViewModel {
     private var user: GitHubUser?
     private var type: UserListType = .none
     private var users: [GitHubUser] = []
-    private var pageNo: Int = 0
+    private var pageNo: Int = 1
+    private var shouldLoadingNextPage: Bool = true
+    private var lastKeyword: String?
     
     let topBarInformation: Observable<UserListViewTopBarInformation?> = Observable(nil)
     let viewNotFoundStatus: Observable<UserListViewNotFoundStatus?> = Observable(nil)
@@ -76,10 +78,40 @@ class UserListViewModel {
         route.value = .showUserProfileVC(user: cellVM.getUser())
     }
     
+    func displayNextPage(keyword: String)
+    {
+        switch type {
+        case .none:
+            if !shouldLoadingNextPage { return }
+            if users.count == 0 { return }
+            pageNo += 1
+            searchUser(keyword: keyword)
+            break
+        case .following, .followers:
+            if !shouldLoadingNextPage { return }
+            if users.count == 0 { return }
+            pageNo += 1
+            getUserFollow()
+            break
+        }
+        
+    }
+    
     func searchUser(keyword: String)
     {
+        if lastKeyword != keyword
+        {
+            //Keyword changed, reset user list and pageNo
+            users = []
+            pageNo = 1
+        }
+        
+        lastKeyword = keyword
+        
         viewNotFoundStatus.value = UserListViewNotFoundStatus.init(text:"" , isHidden: true)
         indicatorStatus.value = UserListIndicatorStatus.init(isAnimated: true, isHidden: false)
+        
+        shouldLoadingNextPage = false
         
         DispatchQueue.global(qos: .background).async {
             
@@ -90,23 +122,40 @@ class UserListViewModel {
             ApiService().searchUser(params: params) { [weak self] success, data, error in
                 
                 self?.indicatorStatus.value = UserListIndicatorStatus.init(isAnimated: false, isHidden: true)
-
+                self?.shouldLoadingNextPage = true
+                
                 do {
                     guard let data = data else
                     {
-                        self?.gitHubUserCellViewModels.value = []
-                        self?.errorMessage.value = String().LString("Error_DidNotReceiveData")
+                        if self?.pageNo == 1
+                        {
+                            self?.gitHubUserCellViewModels.value = []
+                            self?.errorMessage.value = String().LString("Error_DidNotReceiveData")
+                        }
+                        else
+                        {
+                            self?.shouldLoadingNextPage = false
+                        }
                         return
                     }
                     
                     let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as! [String: Any]
-                    
+
                     guard let items = jsonResult["items"] as? [[String: Any]] else {
                         self?.errorMessage.value = String().LString("Error_UnexpectedJsonFormat")
                         return
                     }
                     let jsonData = try JSONSerialization.data(withJSONObject: items, options: .prettyPrinted)
-                    self?.users = try JSONDecoder().decode([GitHubUser].self, from: jsonData)
+                    
+                    if self?.users.count == 0
+                    {
+                        self?.users = try JSONDecoder().decode([GitHubUser].self, from: jsonData)
+                    }
+                    else
+                    {
+                        self?.users += try JSONDecoder().decode([GitHubUser].self, from: jsonData)
+                    }
+                    
                     
                     self?.fetchData()
                 }
@@ -128,23 +177,40 @@ class UserListViewModel {
         viewNotFoundStatus.value = UserListViewNotFoundStatus.init(text:"" , isHidden: true)
         indicatorStatus.value = UserListIndicatorStatus.init(isAnimated: true, isHidden: false)
         
+        shouldLoadingNextPage = false
+        
         DispatchQueue.global(qos: .background).async {
             
             let params = ["per_page":UserDefaultHelper.standard.getData(type: String.self, forKey: .searchPerPage)!,
                           "page":String(self.pageNo)]
             ApiService().getUserFollow(type: self.type.rawValue, login: user.login, params:params) { [weak self] success, data, error in
                 
+                self?.shouldLoadingNextPage = true
                 self?.indicatorStatus.value = UserListIndicatorStatus.init(isAnimated: false, isHidden: true)
 
                 do {
                     guard let data = data else
                     {
-                        self?.gitHubUserCellViewModels.value = []
-                        self?.errorMessage.value = String().LString("Error_DidNotReceiveData")
+                        if self?.pageNo == 1
+                        {
+                            self?.gitHubUserCellViewModels.value = []
+                            self?.errorMessage.value = String().LString("Error_DidNotReceiveData")
+                        }
+                        else
+                        {
+                            self?.shouldLoadingNextPage = false
+                        }
                         return
                     }
 
-                    self?.users = try JSONDecoder().decode([GitHubUser].self, from: data)
+                    if self?.users.count == 0
+                    {
+                        self?.users = try JSONDecoder().decode([GitHubUser].self, from: data)
+                    }
+                    else
+                    {
+                        self?.users += try JSONDecoder().decode([GitHubUser].self, from: data)
+                    }
                     
                     self?.fetchData()
                 }

@@ -44,7 +44,6 @@ class UserListViewController: BaseViewController {
 
         setUpUIs()
         setUpBinding()
-        setUpViewModel()
     }
     
     func setUpUIs()
@@ -126,16 +125,21 @@ class UserListViewController: BaseViewController {
             }
         }
     }
-    
-    func setUpViewModel()
-    {
-        
-    }
-    
+
     @IBAction func btnBackDidTap(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
+}
+
+extension UserListViewController: UIScrollViewDelegate
+{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (((scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height)){
+            viewModel.displayNextPage(keyword: searchBar.text ?? "")
+        }
+
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -170,6 +174,7 @@ extension UserListViewController: UITableViewDataSource {
 extension UserListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         lblSearchInstruction.isHidden = true
+        tableViewMain.setContentOffset(.zero, animated: false)
         searchBar.resignFirstResponder()
         viewModel.searchUser(keyword: searchBar.text ?? "")
     }
