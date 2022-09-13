@@ -7,7 +7,7 @@
 */
 
 "Common_Followers" = "Followers";
-"Common_Following" = "Followng";
+"Common_Following" = "Following";
 "Common_GitHubUserBrowser" = "GitHub User Browser";
 "Common_SearchInstruction" = "Please input username on search bar above and click Search button on the keyboard to search for GitHub User";
 "Common_UserProfile" = "User Profile";

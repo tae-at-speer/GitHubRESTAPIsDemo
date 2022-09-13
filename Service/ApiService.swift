@@ -47,4 +47,20 @@ class ApiService {
         }
     }
     
+    func getUserFollow(type: String, login: String, params: [String:String], completion: @escaping (Bool, Data?, String?) -> ())
+    {
+        let url = requestUrl(string: "users/\(login)/\(type)")
+        
+        HttpRequestHelper().GET(url: url,
+                                params: params,
+                                httpHeader: .application_json) { success, data, errorStr in
+            
+            if success {
+                completion(true, data, nil)
+            } else {
+                completion(false, nil, "Error: getOffer Request failed")
+            }
+        }
+    }
+    
 }

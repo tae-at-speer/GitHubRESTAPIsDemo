@@ -52,7 +52,7 @@ class UserProfileViewModel {
             return
         }
         
-        route.value = .showUserListVC(user: user, type: .follower)
+        route.value = .showUserListVC(user: user, type: .followers)
     }
     
     func showFollowingUserList()
@@ -100,7 +100,7 @@ class UserProfileViewModel {
         }
     }
     
-    func setLogin(login: String)
+    func setUp(login: String)
     {
         self.login = login
     }

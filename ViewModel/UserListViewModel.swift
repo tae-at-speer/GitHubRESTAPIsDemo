@@ -7,15 +7,24 @@
 
 import Foundation
 
-enum UserListType {
+enum UserListType:String {
     case none
-    case follower
+    case followers
     case following
 }
 
 enum UserListViewModelRoute {
     case initial
     case showUserProfileVC(user: GitHubUser)
+}
+
+struct UserListViewTopBarInformation
+{
+    var titleStr: String
+    var isBackButtonHidden: Bool
+    var isSearchBarHidden: Bool
+    var consSearchBarHeight: CGFloat
+    var isLblSearchInstructionHidden: Bool
 }
 
 struct UserListViewNotFoundStatus
@@ -32,9 +41,12 @@ struct UserListIndicatorStatus
 
 class UserListViewModel {
     
+    private var user: GitHubUser?
+    private var type: UserListType = .none
     private var users: [GitHubUser] = []
     private var pageNo: Int = 0
     
+    let topBarInformation: Observable<UserListViewTopBarInformation?> = Observable(nil)
     let viewNotFoundStatus: Observable<UserListViewNotFoundStatus?> = Observable(nil)
     let indicatorStatus: Observable<UserListIndicatorStatus?> = Observable(nil)
     let gitHubUserCellViewModels: Observable<[GitHubUserCellViewModel]> = Observable([])
@@ -106,6 +118,44 @@ class UserListViewModel {
         }
     }
     
+    func getUserFollow()
+    {
+        guard let user = user else
+        {
+            return
+        }
+        
+        viewNotFoundStatus.value = UserListViewNotFoundStatus.init(text:"" , isHidden: true)
+        indicatorStatus.value = UserListIndicatorStatus.init(isAnimated: true, isHidden: false)
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            let params = ["per_page":UserDefaultHelper.standard.getData(type: String.self, forKey: .searchPerPage)!,
+                          "page":String(self.pageNo)]
+            ApiService().getUserFollow(type: self.type.rawValue, login: user.login, params:params) { [weak self] success, data, error in
+                
+                self?.indicatorStatus.value = UserListIndicatorStatus.init(isAnimated: false, isHidden: true)
+
+                do {
+                    guard let data = data else
+                    {
+                        self?.gitHubUserCellViewModels.value = []
+                        self?.errorMessage.value = String().LString("Error_DidNotReceiveData")
+                        return
+                    }
+
+                    self?.users = try JSONDecoder().decode([GitHubUser].self, from: data)
+                    
+                    self?.fetchData()
+                }
+                catch
+                {
+                    self?.errorMessage.value = error.localizedDescription
+                }
+            }
+        }
+    }
+    
     func getCellViewModel(at indexPath: IndexPath) -> GitHubUserCellViewModel
     {
         return gitHubUserCellViewModels.value[indexPath.row]
@@ -116,6 +166,45 @@ class UserListViewModel {
         return gitHubUserCellViewModels.value.count
     }
     
+    func setUp(user: GitHubUser?, type: UserListType)
+    {
+        self.user = user
+        self.type = type
+        
+        var titleStr = ""
+        var isBackButtonHidden = true
+        var isSearchBarHidden = false
+        var consSearchBarHeight = 44.0
+        var isLblSearchInstructionHidden = false
+        
+        switch type {
+        case .none:
+            titleStr = String().LString("Common_GitHubUserBrowser")
+            break
+        case .followers:
+            titleStr = "\(self.user?.login ?? "")'s \(String().LString("Common_Followers"))"
+            isBackButtonHidden = false
+            isSearchBarHidden = true
+            consSearchBarHeight = 0
+            isLblSearchInstructionHidden = true
+            getUserFollow()
+            break
+        case .following:
+            titleStr = "\(self.user?.login ?? "")'s \(String().LString("Common_Following"))"
+            isBackButtonHidden = false
+            isSearchBarHidden = true
+            consSearchBarHeight = 0
+            isLblSearchInstructionHidden = true
+            getUserFollow()
+            break
+        }
+        
+        topBarInformation.value = .init(titleStr: titleStr,
+                                        isBackButtonHidden: isBackButtonHidden,
+                                        isSearchBarHidden: isSearchBarHidden,
+                                        consSearchBarHeight: consSearchBarHeight,
+                                        isLblSearchInstructionHidden: isLblSearchInstructionHidden)
+    }
    
 }
 

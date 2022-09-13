@@ -23,7 +23,7 @@ class UserProfileViewController: BaseViewController {
     
     init(login: String) {
         super.init(nibName: nil, bundle: nil)
-        viewModel.setLogin(login: login)
+        viewModel.setUp(login: login)
     }
     
     required init?(coder: NSCoder) {

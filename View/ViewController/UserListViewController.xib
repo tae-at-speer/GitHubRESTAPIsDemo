@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserListViewController" customModule="GitHubRESTAPIsDemo" customModuleProvider="target">
             <connections>
+                <outlet property="btnBack" destination="syT-9E-iTV" id="LSE-v4-LGT"/>
+                <outlet property="consSearchBarHeight" destination="Vae-BB-bpx" id="X0j-Pa-xVf"/>
                 <outlet property="indicator" destination="rOd-sv-zwu" id="xAa-ER-r0u"/>
                 <outlet property="lblNotFound" destination="6V7-f7-ldT" id="7WW-H1-1vI"/>
                 <outlet property="lblSearchInstruction" destination="v70-JI-Slj" id="v8b-68-McJ"/>
@@ -34,12 +36,28 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syT-9E-iTV">
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="pNB-JV-36E"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="chevron.left" catalog="system"/>
+                            <connections>
+                                <action selector="btnBackDidTap:" destination="-1" eventType="touchUpInside" id="pVM-0B-CUY"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="MDW-PZ-t3v" secondAttribute="trailing" id="14o-ll-9pA"/>
+                        <constraint firstItem="syT-9E-iTV" firstAttribute="top" secondItem="Jv6-IQ-0iw" secondAttribute="top" id="NKM-en-v04"/>
                         <constraint firstAttribute="height" constant="60" id="ZY9-Lh-5MZ"/>
                         <constraint firstAttribute="bottom" secondItem="MDW-PZ-t3v" secondAttribute="bottom" id="eTE-ZN-vG9"/>
+                        <constraint firstAttribute="bottom" secondItem="syT-9E-iTV" secondAttribute="bottom" id="gtR-2N-MM2"/>
+                        <constraint firstItem="syT-9E-iTV" firstAttribute="leading" secondItem="Jv6-IQ-0iw" secondAttribute="leading" id="iFz-Ae-d5Q"/>
                         <constraint firstItem="MDW-PZ-t3v" firstAttribute="leading" secondItem="Jv6-IQ-0iw" secondAttribute="leading" id="m9L-EE-Lm9"/>
                         <constraint firstItem="MDW-PZ-t3v" firstAttribute="top" secondItem="Jv6-IQ-0iw" secondAttribute="top" id="yP4-7L-dia"/>
                     </constraints>
@@ -122,6 +140,7 @@
         </view>
     </objects>
     <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

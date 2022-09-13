@@ -9,13 +9,22 @@ import UIKit
 
 class UserListViewController: BaseViewController {
     
+    //Top Bar
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblSearchInstruction: UILabel!
+    @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    //View Not Found
     @IBOutlet weak var viewNotFound: UIView!
     @IBOutlet weak var lblNotFound: UILabel!
-    @IBOutlet weak var searchBar: UISearchBar!
+    
+    //Other
+    @IBOutlet weak var lblSearchInstruction: UILabel!
     @IBOutlet weak var tableViewMain: UITableView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
+    //Constraints
+    @IBOutlet weak var consSearchBarHeight: NSLayoutConstraint!
     
     lazy var viewModel = {
         UserListViewModel()
@@ -23,6 +32,7 @@ class UserListViewController: BaseViewController {
     
     init(user: GitHubUser?, type: UserListType) {
         super.init(nibName: nil, bundle: nil)
+        viewModel.setUp(user: user, type: type)
     }
     
     required init?(coder: NSCoder) {
@@ -63,6 +73,17 @@ class UserListViewController: BaseViewController {
     
     func setUpBinding()
     {
+        viewModel.topBarInformation.bind { [weak self] in
+            guard let info = $0 else { return }
+            DispatchQueue.main.async {
+                self?.lblTitle.text = info.titleStr
+                self?.btnBack.isHidden = info.isBackButtonHidden
+                self?.searchBar.isHidden = info.isSearchBarHidden
+                self?.consSearchBarHeight.constant = info.consSearchBarHeight
+                self?.lblSearchInstruction.isHidden = info.isLblSearchInstructionHidden
+            }
+        }
+        
         viewModel.viewNotFoundStatus.bind { [weak self] in
             guard let info = $0 else { return }
             DispatchQueue.main.async {
@@ -110,19 +131,11 @@ class UserListViewController: BaseViewController {
     {
         
     }
-
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func btnBackDidTap(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
-    */
-
+    
 }
 
 // MARK: - UITableViewDelegate
