@@ -7,33 +7,33 @@
 
 import Foundation
 
-enum MainViewModelRoute {
+enum UserListViewModelRoute {
     case initial
     case showUserProfileVC(user: GitHubUser)
 }
 
-struct MainVMViewNotFoundStatus
+struct UserListViewNotFoundStatus
 {
     var text: String
     var isHidden: Bool
 }
 
-struct MainVMIndicatorStatus
+struct UserListIndicatorStatus
 {
     var isAnimated: Bool
     var isHidden: Bool
 }
 
-class MainViewModel {
+class UserListViewModel {
     
     private var users: [GitHubUser] = []
     private var pageNo: Int = 0
     
-    let viewNotFoundStatus: Observable<MainVMViewNotFoundStatus?> = Observable(nil)
-    let indicatorStatus: Observable<MainVMIndicatorStatus?> = Observable(nil)
+    let viewNotFoundStatus: Observable<UserListViewNotFoundStatus?> = Observable(nil)
+    let indicatorStatus: Observable<UserListIndicatorStatus?> = Observable(nil)
     let gitHubUserCellViewModels: Observable<[GitHubUserCellViewModel]> = Observable([])
     let errorMessage: Observable<String?> = Observable(nil)
-    let route: Observable<MainViewModelRoute> = Observable(.initial)
+    let route: Observable<UserListViewModelRoute> = Observable(.initial)
 
     init() {}
     
@@ -49,7 +49,7 @@ class MainViewModel {
         }
         
         gitHubUserCellViewModels.value = tempList
-        viewNotFoundStatus.value = MainVMViewNotFoundStatus.init(text:String().LString("Error_NotFound") , isHidden: (tempList.count != 0))
+        viewNotFoundStatus.value = UserListViewNotFoundStatus.init(text:String().LString("Error_NotFound") , isHidden: (tempList.count != 0))
     }
     
     func push(indexPath: IndexPath)
@@ -60,8 +60,8 @@ class MainViewModel {
     
     func searchUser(keyword: String)
     {
-        viewNotFoundStatus.value = MainVMViewNotFoundStatus.init(text:"" , isHidden: true)
-        indicatorStatus.value = MainVMIndicatorStatus.init(isAnimated: true, isHidden: false)
+        viewNotFoundStatus.value = UserListViewNotFoundStatus.init(text:"" , isHidden: true)
+        indicatorStatus.value = UserListIndicatorStatus.init(isAnimated: true, isHidden: false)
         
         DispatchQueue.global(qos: .background).async {
             
@@ -71,7 +71,7 @@ class MainViewModel {
             
             ApiService().searchUser(params: params) { [weak self] success, data, error in
                 
-                self?.indicatorStatus.value = MainVMIndicatorStatus.init(isAnimated: false, isHidden: true)
+                self?.indicatorStatus.value = UserListIndicatorStatus.init(isAnimated: false, isHidden: true)
 
                 do {
                     guard let data = data else

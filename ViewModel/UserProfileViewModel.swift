@@ -12,6 +12,14 @@ struct UserProfileInformation
     var avatarUrlStr: String
     var userNameStr: String
     var loginNameStr: String
+    var followerCountStr: String
+    var followingCountStr: String
+}
+
+struct UserProfileIndicatorStatus
+{
+    var isAnimated: Bool
+    var isHidden: Bool
 }
 
 class UserProfileViewModel {
@@ -19,7 +27,7 @@ class UserProfileViewModel {
     private var login: String?
     private var user: GitHubUser?
     
-    let indicatorStatus: Observable<MainVMIndicatorStatus?> = Observable(nil)
+    let indicatorStatus: Observable<UserProfileIndicatorStatus?> = Observable(nil)
     let userProfileInformation: Observable<UserProfileInformation?> = Observable(nil)
     let errorMessage: Observable<String?> = Observable(nil)
     
@@ -30,6 +38,16 @@ class UserProfileViewModel {
     
     deinit{ print("UserProfileViewModel deinit") }
     
+    func showFollowerUserList()
+    {
+        
+    }
+    
+    func showFollowingUserList()
+    {
+        
+    }
+    
     func getUserProfile()
     {
         guard let login = login else
@@ -38,13 +56,13 @@ class UserProfileViewModel {
             return
         }
         
-        indicatorStatus.value = MainVMIndicatorStatus.init(isAnimated: true, isHidden: false)
+        indicatorStatus.value = UserProfileIndicatorStatus.init(isAnimated: true, isHidden: false)
         
         DispatchQueue.global(qos: .background).async {
 
             ApiService().getUserProfile(login: login) { [weak self] success, data, error in
                 
-                self?.indicatorStatus.value = MainVMIndicatorStatus.init(isAnimated: false, isHidden: true)
+                self?.indicatorStatus.value = UserProfileIndicatorStatus.init(isAnimated: false, isHidden: true)
 
                 do {
                     guard let data = data else
@@ -74,10 +92,14 @@ class UserProfileViewModel {
         let avatarUrlStr = user?.avatar_url ?? ""
         let userNameStr = user?.name == "" ? user?.login ?? "" : user?.name ?? ""
         let loginNameStr = user?.login ?? ""
-         
+        let followerCountStr = "\(String(user?.followers ?? 0)) \(String().LString("Common_Followers"))"
+        let followingCountStr = "\(String(user?.following ?? 0)) \(String().LString("Common_Following"))"
+        
         userProfileInformation.value = UserProfileInformation.init(avatarUrlStr: avatarUrlStr,
                                                                    userNameStr: userNameStr,
-                                                                   loginNameStr: loginNameStr)
+                                                                   loginNameStr: loginNameStr,
+                                                                   followerCountStr: followerCountStr,
+                                                                   followingCountStr: followingCountStr)
     }
     
 }

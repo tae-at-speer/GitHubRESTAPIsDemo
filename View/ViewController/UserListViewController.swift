@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  UserListController.swift
 //  GitHubRESTAPIsDemo
 //
 //  Created by Heaven Yip on 2022-09-12.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: BaseViewController {
+class UserListViewController: BaseViewController {
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblSearchInstruction: UILabel!
@@ -18,8 +18,16 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     lazy var viewModel = {
-       MainViewModel()
+        UserListViewModel()
     }()
+    
+    init(user: GitHubUser?) {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +127,7 @@ class MainViewController: BaseViewController {
 
 // MARK: - UITableViewDelegate
 
-extension MainViewController: UITableViewDelegate {
+extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
@@ -127,7 +135,7 @@ extension MainViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 
-extension MainViewController: UITableViewDataSource {
+extension UserListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getCellViewModelCount()
     }
@@ -146,7 +154,7 @@ extension MainViewController: UITableViewDataSource {
 }
 
 // MARK: - UISearchBarDelegate
-extension MainViewController: UISearchBarDelegate {
+extension UserListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         lblSearchInstruction.isHidden = true
         searchBar.resignFirstResponder()

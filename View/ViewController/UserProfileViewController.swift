@@ -11,8 +11,11 @@ class UserProfileViewController: BaseViewController {
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var imageViewMain: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblLoginName: UILabel!
+    @IBOutlet weak var lblFollowerCount: UILabel!
+    @IBOutlet weak var lblFollowingCount: UILabel!
     
     lazy var viewModel = {
        UserProfileViewModel()
@@ -37,6 +40,10 @@ class UserProfileViewController: BaseViewController {
 
     func setUpUIs()
     {
+        //UILabel
+        lblTitle.text = String().LString("Common_UserProfile")
+        
+        //UIImageView
         imageViewMain.layer.masksToBounds = false
         imageViewMain.layer.cornerRadius = imageViewMain.frame.height/2
         imageViewMain.clipsToBounds = true
@@ -52,6 +59,8 @@ class UserProfileViewController: BaseViewController {
                 }
                 self?.lblUserName.text = info.userNameStr
                 self?.lblLoginName.text = info.loginNameStr
+                self?.lblFollowerCount.text = info.followerCountStr
+                self?.lblFollowingCount.text = info.followingCountStr
             }
         }
         
@@ -86,14 +95,13 @@ class UserProfileViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func viewFollowerDidTap(_ sender: Any) {
+        viewModel.showFollowerUserList()
     }
-    */
-
+    
+    
+    @IBAction func viewFollowingDidTap(_ sender: Any) {
+        viewModel.showFollowingUserList()
+    }
+    
 }
