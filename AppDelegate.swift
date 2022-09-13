@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let mainVC = UserListViewController.init(user: nil)
+        let mainVC = UserListViewController.init(user: nil, type: .none)
         mainNC = UINavigationController.init(rootViewController: mainVC)
         mainNC?.navigationBar.isHidden = true
         

@@ -84,6 +84,14 @@ class UserProfileViewController: BaseViewController {
                 self?.showErrorMessageAlert(message: message)
             }
         }
+        
+        viewModel.route.bind { [weak self] _type in
+            switch _type{
+            case .initial: break
+            case .showUserListVC(let user, let type):
+                self?.navigationController?.pushViewController(UserListViewController.init(user: user, type: type), animated: true)
+            }
+        }
     }
     
     func setUpViewModel()

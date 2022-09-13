@@ -21,7 +21,7 @@ class UserListViewController: BaseViewController {
         UserListViewModel()
     }()
     
-    init(user: GitHubUser?) {
+    init(user: GitHubUser?, type: UserListType) {
         super.init(nibName: nil, bundle: nil)
     }
     

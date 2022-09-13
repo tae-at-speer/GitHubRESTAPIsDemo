@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum UserListType {
+    case none
+    case follower
+    case following
+}
+
 enum UserListViewModelRoute {
     case initial
     case showUserProfileVC(user: GitHubUser)

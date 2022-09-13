@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum UserProfileViewModelRoute {
+    case initial
+    case showUserListVC(user: GitHubUser, type: UserListType)
+}
+
 struct UserProfileInformation
 {
     var avatarUrlStr: String
@@ -30,6 +35,7 @@ class UserProfileViewModel {
     let indicatorStatus: Observable<UserProfileIndicatorStatus?> = Observable(nil)
     let userProfileInformation: Observable<UserProfileInformation?> = Observable(nil)
     let errorMessage: Observable<String?> = Observable(nil)
+    let route: Observable<UserProfileViewModelRoute> = Observable(.initial)
     
     init()
     {
@@ -40,12 +46,24 @@ class UserProfileViewModel {
     
     func showFollowerUserList()
     {
+        guard let user = user else
+        {
+            errorMessage.value = String().LString("Error_UnexpectedGitHubUserObject")
+            return
+        }
         
+        route.value = .showUserListVC(user: user, type: .follower)
     }
     
     func showFollowingUserList()
     {
+        guard let user = user else
+        {
+            errorMessage.value = String().LString("Error_UnexpectedGitHubUserObject")
+            return
+        }
         
+        route.value = .showUserListVC(user: user, type: .following)
     }
     
     func getUserProfile()

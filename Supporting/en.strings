@@ -14,5 +14,6 @@
 
 "Error_DidNotReceiveData" = "Did not receive data";
 "Error_NotFound" = "User Not Found";
+"Error_UnexpectedGitHubUserObject" = "Error: Upexpected GitHubUser object";
 "Error_UnexpectedJsonFormat" = "Error: Unexpected Json format";
 "Error_UnexpectedLoginName" = "Error: Upexpected Login Name";
