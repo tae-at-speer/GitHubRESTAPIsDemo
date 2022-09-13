@@ -42,7 +42,7 @@ class UserProfileViewModel {
         setUserProfileInformation()
     }
     
-    deinit{ print("UserProfileViewModel deinit") }
+    deinit{ }
     
     func showFollowerUserList()
     {

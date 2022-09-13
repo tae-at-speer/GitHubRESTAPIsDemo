@@ -49,7 +49,6 @@ class UserListViewController: BaseViewController {
     func setUpUIs()
     {
         //UILabel
-        lblTitle.text = String().LString("Common_GitHubUserBrowser")
         lblSearchInstruction.text = String().LString("Common_SearchInstruction")
         
         //UIView

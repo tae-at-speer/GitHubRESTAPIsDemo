@@ -9,7 +9,7 @@ import Foundation
 
 class GitHubUserCellViewModel {
     
-    deinit{ print("GitHubUserCellViewModel deinit") }
+    deinit{ }
     
     private var user: GitHubUser
     

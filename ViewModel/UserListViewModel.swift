@@ -57,7 +57,7 @@ class UserListViewModel {
 
     init() {}
     
-    deinit{ print("MainViewModel deinit") }
+    deinit{ }
     
     func fetchData()
     {
@@ -171,6 +171,7 @@ class UserListViewModel {
     {
         guard let user = user else
         {
+            errorMessage.value = String().LString("Error_UnexpectedGitHubUserObject")
             return
         }
         
