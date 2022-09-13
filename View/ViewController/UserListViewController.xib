@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserListViewController" customModule="GitHubRESTAPIsDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="btnBack" destination="syT-9E-iTV" id="LSE-v4-LGT"/>
+                <outlet property="consSearchBarHeight" destination="Vae-BB-bpx" id="X0j-Pa-xVf"/>
+                <outlet property="indicator" destination="rOd-sv-zwu" id="xAa-ER-r0u"/>
+                <outlet property="lblNotFound" destination="6V7-f7-ldT" id="7WW-H1-1vI"/>
+                <outlet property="lblSearchInstruction" destination="v70-JI-Slj" id="v8b-68-McJ"/>
+                <outlet property="lblTitle" destination="MDW-PZ-t3v" id="1rd-DQ-H6F"/>
+                <outlet property="searchBar" destination="p3P-VG-jXx" id="4zr-DQ-bqa"/>
+                <outlet property="tableViewMain" destination="DPK-2P-AiR" id="NbM-bm-lHO"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewNotFound" destination="oQl-iR-bif" id="coy-mB-7EF"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jv6-IQ-0iw">
+                    <rect key="frame" x="0.0" y="44" width="414" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GitHub User Browser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDW-PZ-t3v">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syT-9E-iTV">
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="pNB-JV-36E"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="chevron.left" catalog="system"/>
+                            <connections>
+                                <action selector="btnBackDidTap:" destination="-1" eventType="touchUpInside" id="pVM-0B-CUY"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="MDW-PZ-t3v" secondAttribute="trailing" id="14o-ll-9pA"/>
+                        <constraint firstItem="syT-9E-iTV" firstAttribute="top" secondItem="Jv6-IQ-0iw" secondAttribute="top" id="NKM-en-v04"/>
+                        <constraint firstAttribute="height" constant="60" id="ZY9-Lh-5MZ"/>
+                        <constraint firstAttribute="bottom" secondItem="MDW-PZ-t3v" secondAttribute="bottom" id="eTE-ZN-vG9"/>
+                        <constraint firstAttribute="bottom" secondItem="syT-9E-iTV" secondAttribute="bottom" id="gtR-2N-MM2"/>
+                        <constraint firstItem="syT-9E-iTV" firstAttribute="leading" secondItem="Jv6-IQ-0iw" secondAttribute="leading" id="iFz-Ae-d5Q"/>
+                        <constraint firstItem="MDW-PZ-t3v" firstAttribute="leading" secondItem="Jv6-IQ-0iw" secondAttribute="leading" id="m9L-EE-Lm9"/>
+                        <constraint firstItem="MDW-PZ-t3v" firstAttribute="top" secondItem="Jv6-IQ-0iw" secondAttribute="top" id="yP4-7L-dia"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUj-yq-fea">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input username on search bar above to search for GitHub User" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v70-JI-Slj">
+                    <rect key="frame" x="32" y="268" width="350" height="120"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="iH8-j2-5ef"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQl-iR-bif">
+                    <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6V7-f7-ldT">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="758"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="6V7-f7-ldT" firstAttribute="top" secondItem="oQl-iR-bif" secondAttribute="top" id="0PD-PZ-Fxt"/>
+                        <constraint firstAttribute="trailing" secondItem="6V7-f7-ldT" secondAttribute="trailing" id="2Nc-sa-Fz5"/>
+                        <constraint firstItem="6V7-f7-ldT" firstAttribute="leading" secondItem="oQl-iR-bif" secondAttribute="leading" id="2Uu-5U-zAm"/>
+                        <constraint firstAttribute="bottom" secondItem="6V7-f7-ldT" secondAttribute="bottom" id="haq-Sm-7SL"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DPK-2P-AiR">
+                    <rect key="frame" x="0.0" y="148" width="414" height="714"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="rOd-sv-zwu">
+                    <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                </activityIndicatorView>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="p3P-VG-jXx">
+                    <rect key="frame" x="0.0" y="104" width="414" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Vae-BB-bpx"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Jv6-IQ-0iw" secondAttribute="trailing" id="0Hr-Pf-ZYu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DPK-2P-AiR" secondAttribute="trailing" id="6H3-R7-C1x"/>
+                <constraint firstItem="DPK-2P-AiR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6bg-Ln-CAD"/>
+                <constraint firstItem="p3P-VG-jXx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FrD-KT-10M"/>
+                <constraint firstItem="Jv6-IQ-0iw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ghf-lX-j3i"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DPK-2P-AiR" secondAttribute="bottom" id="Jpj-Mh-scV"/>
+                <constraint firstItem="v70-JI-Slj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="32" id="Lct-G8-Dbe"/>
+                <constraint firstItem="Jv6-IQ-0iw" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="O8w-A5-jZ4"/>
+                <constraint firstItem="p3P-VG-jXx" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="Y9n-EP-id3"/>
+                <constraint firstItem="p3P-VG-jXx" firstAttribute="top" secondItem="Jv6-IQ-0iw" secondAttribute="bottom" id="Yhv-c3-hvD"/>
+                <constraint firstItem="v70-JI-Slj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bfH-2B-EbF"/>
+                <constraint firstItem="rOd-sv-zwu" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="brj-lr-CbX"/>
+                <constraint firstItem="nUj-yq-fea" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="drJ-iF-qnR"/>
+                <constraint firstItem="oQl-iR-bif" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gOj-DT-pIh"/>
+                <constraint firstAttribute="trailing" secondItem="nUj-yq-fea" secondAttribute="trailing" id="h9f-Hu-I70"/>
+                <constraint firstAttribute="trailing" secondItem="v70-JI-Slj" secondAttribute="trailing" constant="32" id="jqH-C2-q1j"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oQl-iR-bif" secondAttribute="trailing" id="k0V-DQ-fmO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="nUj-yq-fea" secondAttribute="bottom" id="kIZ-xy-BDa"/>
+                <constraint firstItem="rOd-sv-zwu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mJu-uQ-9ty"/>
+                <constraint firstItem="v70-JI-Slj" firstAttribute="top" secondItem="p3P-VG-jXx" secondAttribute="bottom" constant="120" id="mjL-Ng-mST"/>
+                <constraint firstItem="DPK-2P-AiR" firstAttribute="top" secondItem="p3P-VG-jXx" secondAttribute="bottom" id="o5O-ON-ucb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="oQl-iR-bif" secondAttribute="bottom" id="oqt-Bc-0Et"/>
+                <constraint firstItem="oQl-iR-bif" firstAttribute="top" secondItem="Jv6-IQ-0iw" secondAttribute="bottom" id="yDE-7z-Y28"/>
+                <constraint firstItem="nUj-yq-fea" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yQs-eJ-Bnv"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="111.83035714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
