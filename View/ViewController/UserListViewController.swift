@@ -26,6 +26,9 @@ class UserListViewController: BaseViewController {
     //Constraints
     @IBOutlet weak var consSearchBarHeight: NSLayoutConstraint!
     
+    //Other
+    let refreshControl = UIRefreshControl()
+    
     lazy var viewModel = {
         UserListViewModel()
     }()
@@ -67,6 +70,11 @@ class UserListViewController: BaseViewController {
         
         //UISearchBar
         searchBar.delegate = self
+        
+        //UIRefreshControl
+        refreshControl.attributedTitle = NSAttributedString(string: String().LString("Common_PullToRefresh"))
+        refreshControl.addTarget(self, action: #selector(refreshDidTrigger(_:)), for: .valueChanged)
+        tableViewMain.addSubview(refreshControl) // not required when using UITableViewController
     }
     
     func setUpBinding()
@@ -105,6 +113,7 @@ class UserListViewController: BaseViewController {
         
         viewModel.gitHubUserCellViewModels.bind { [weak self] _ in
             DispatchQueue.main.async {
+                self?.refreshControl.endRefreshing()
                 self?.tableViewMain.reloadData()
             }
         }
@@ -125,6 +134,11 @@ class UserListViewController: BaseViewController {
         }
     }
 
+    @objc func refreshDidTrigger(_ sender: AnyObject)
+    {
+        viewModel.refreshTableView(keyword: searchBar.text)
+    }
+    
     @IBAction func btnBackDidTap(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
