@@ -78,6 +78,19 @@ class UserListViewModel {
         route.value = .showUserProfileVC(user: cellVM.getUser())
     }
     
+    func refreshTableView(keyword: String?)
+    {
+        switch type {
+        case .none:
+            lastKeyword = ""
+            searchUser(keyword: keyword ?? "")
+            break
+        case .followers, .following:
+            getUserFollow()
+            break
+        }
+    }
+    
     func displayNextPage(keyword: String)
     {
         switch type {
